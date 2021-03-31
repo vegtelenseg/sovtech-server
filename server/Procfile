@@ -1,1 +1,1 @@
-web: yarn && yarn global add nodemon && yarn start
+web: yarn && yarn build && node build/index.js

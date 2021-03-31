@@ -6,12 +6,14 @@ import { PersonResolver } from "./resolvers/PersonResolver";
 
 export const baseURL = "https://swapi.dev/api";
 
-(async function main() {
+export const app = async function main() {
   const schema = await buildSchema({
     resolvers: [PersonResolver],
     emitSchemaFile: path.join(__dirname, "generated/schema.graphql"),
   });
   const server = new ApolloServer({ schema });
-  const port = Number(process.env.PORT) || 5000;
-  await server.listen(port, () => console.log("Server has started!"));
-})();
+  const port = process.env.PORT || 5000;
+  const host = process.env.HOST || "0.0.0.0";
+  await server.listen(port, host, () => console.log("Server has started!"));
+};
+app();
