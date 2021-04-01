@@ -4,7 +4,9 @@ import { Homeworld } from "./Homeworld";
 
 type Gender = "male" | "female" | "n/a";
 
-@ObjectType()
+@ObjectType({
+  simpleResolvers: true,
+})
 export class Person {
   @Field()
   name: string;

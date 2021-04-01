@@ -25,5 +25,6 @@ type Person {
 }
 
 type Query {
-  people(name: String): [Person!]!
+  people(limit: Int = 5, offset: Int!): [Person!]!
+  person(name: String!): [Person!]!
 }
