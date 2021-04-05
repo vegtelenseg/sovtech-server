@@ -1,11 +1,11 @@
-import { Query } from "./root";
-import { Vehicle } from "./vehicle";
-import { Film, FilmDetails } from "./film";
-import { People } from "./people";
-import { Planet } from "./planet";
-import { Species } from "./species";
-import { Starship } from "./starship";
-import { Node } from "./root";
+import { Query } from "./gql/root";
+import { Vehicle } from "./gql/vehicle";
+import { Film, FilmDetails } from "./gql/film";
+import { People } from "./gql/people";
+import { Planet } from "./gql/planet";
+import { Species } from "./gql/species";
+import { Starship } from "./gql/starship";
+import { Node } from "./gql/root";
 
 export default [
   Query,
