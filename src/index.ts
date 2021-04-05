@@ -1,20 +1,32 @@
-import "reflect-metadata";
 import { ApolloServer } from "apollo-server";
-import { buildSchema } from "type-graphql";
-import * as path from "path";
-import { PeopleResolver } from "./resolvers/PersonResolver";
+import typeDefs from "./schemas";
+import LoadResolvers from "./resolvers";
+import { getAxiosRequestObject } from "./connectors/swapi";
+import DataLoader from "dataloader";
 
-export const baseURL = "https://swapi.dev/api";
+const API_URI = process.env.API_URI || "https://swapi.dev/api";
 
-export const app = async function main() {
-  const schema = await buildSchema({
-    resolvers: [PeopleResolver],
+const axiosRequestObject = getAxiosRequestObject(API_URI);
 
-    emitSchemaFile: path.join(__dirname, "generated/schema.graphql"),
-  });
-  const server = new ApolloServer({ schema });
-  const port = process.env.PORT || 5000;
-  const host = process.env.HOST || "0.0.0.0";
-  await server.listen(port, host, () => console.log("Server has started!"));
-};
-app();
+export const loader = new DataLoader(
+  (urls: string[]) => {
+    const promises = urls.map((url) => axiosRequestObject(url));
+    return Promise.all(promises);
+  },
+  { batch: false }
+);
+
+const resolvers = LoadResolvers(axiosRequestObject);
+
+const apolloServer = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: {
+    loader,
+  },
+});
+
+const PORT = process.env.PORT || 5000;
+apolloServer.listen(PORT, () =>
+  console.log(`Server has started on port: ${PORT}`)
+);
