@@ -1,11 +1,10 @@
-import { getPageFetcher } from "../connectors/swapi";
+import { getPageFetcher } from "../services/swapi";
 
 const path = "/species";
 
 export default (fetch) => ({
   Query: {
-    allSpecies: (_, params) =>
-      getPageFetcher(fetch)(path, params.offset, params.limit),
+    allSpecies: (_, params) => getPageFetcher(fetch)(path, params.offset),
     species: (_, params) => fetch(params.id || `${path}/${params.speciesID}/`),
   },
   Species: {

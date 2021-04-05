@@ -1,11 +1,10 @@
-import { getPageFetcher } from "../connectors/swapi";
+import { getPageFetcher } from "../services/swapi";
 
 const path = "/starships";
 
 export default (fetch) => ({
   Query: {
-    allStarships: (_, params) =>
-      getPageFetcher(fetch)(path, params.offset, params.limit),
+    allStarships: (_, params) => getPageFetcher(fetch)(path, params.offset),
     starship: (_, params) =>
       fetch(params.id || `${path}/${params.starshipID}/`),
   },

@@ -1,11 +1,10 @@
-import { getPageFetcher } from "../connectors/swapi";
+import { getPageFetcher } from "../services/swapi";
 
 const path = "/vehicles";
 
 export default (fetch) => ({
   Query: {
-    allVehicles: (_, params) =>
-      getPageFetcher(fetch)(path, params.offset, params.limit),
+    allVehicles: (_, params) => getPageFetcher(fetch)(path, params.offset),
     vehicle: (_, params) => fetch(params.id || `${path}/${params.vehicleID}/`),
   },
   Vehicle: {

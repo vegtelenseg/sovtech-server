@@ -1,11 +1,10 @@
-import { getPageFetcher } from "../connectors/swapi";
+import { getPageFetcher } from "../services/swapi";
 
 const path = "/films";
 
 export default (fetch) => ({
   Query: {
-    allFilms: (_, params) =>
-      getPageFetcher(fetch)(path, params.offset, params.limit),
+    allFilms: (_, params) => getPageFetcher(fetch)(path, params.offset),
     film: (_, params) => fetch(params.id || `${path}/${params.filmID}/`),
   },
   Film: {

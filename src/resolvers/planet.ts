@@ -1,11 +1,10 @@
-import { getPageFetcher } from "../connectors/swapi";
+import { getPageFetcher } from "../services/swapi";
 
 const path = "/planets/";
 
 export default (fetch) => ({
   Query: {
-    allPlanets: (_, params) =>
-      getPageFetcher(fetch)(path, params.offset, params.limit),
+    allPlanets: (_, params) => getPageFetcher(fetch)(path, params.offset),
     planet: async (_, params) => {
       const planet = await fetch(params.id || `${path}${params.planetID}/`);
       return planet.results[0];

@@ -1,7 +1,7 @@
 import { ApolloServer } from "apollo-server";
 import typeDefs from "./schemas";
 import LoadResolvers from "./resolvers";
-import { getAxiosRequestObject } from "./connectors/swapi";
+import { getAxiosRequestObject } from "./services/swapi";
 import DataLoader from "dataloader";
 
 const API_URI = process.env.API_URI || "https://swapi.dev/api";

@@ -1,18 +1,18 @@
 import {
   getPageFetcher,
-  IFetcher,
+  DataFetcher,
   fetchBySearchPhrase,
-} from "../connectors/swapi";
+} from "../services/swapi";
 
 const path = "/people";
 
-export default (fetch: IFetcher) => ({
+export default (fetch: DataFetcher) => ({
   Query: {
     allPeople: (_, params) => {
       const allPeople = getPageFetcher(fetch)(
         path,
-        params.offset,
-        params.limit
+        params.offset
+        // params.limit
       );
       return allPeople;
     },
