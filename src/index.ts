@@ -3,6 +3,7 @@ import typeDefs from "./schemas";
 import LoadResolvers from "./resolvers";
 import { getAxiosRequestObject } from "./services/swapi";
 import DataLoader from "dataloader";
+import { Logger } from "./logger/Logger";
 
 const API_URI = process.env.API_URI || "https://swapi.dev/api";
 
@@ -18,11 +19,13 @@ export const loader = new DataLoader(
 
 const resolvers = LoadResolvers(axiosRequestObject);
 
-const apolloServer = new ApolloServer({
+export const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
+  logger: Logger,
   context: {
     loader,
+    logger: Logger,
   },
 });
 

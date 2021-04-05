@@ -2,3 +2,5 @@ node_modules
 typings
 build
 .DS_Store
+logs*
+yarn-error*
