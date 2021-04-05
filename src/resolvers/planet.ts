@@ -8,7 +8,6 @@ export default (fetch) => ({
       getPageFetcher(fetch)(path, params.offset, params.limit),
     planet: async (_, params) => {
       const planet = await fetch(params.id || `${path}${params.planetID}/`);
-      console.log("PALANE: ", planet);
       return planet.results[0];
     },
   },

@@ -27,8 +27,7 @@ export default (fetch: IFetcher) => ({
     skinColor: (person) => person.skin_color,
     eyeColor: (person) => person.eye_color,
     birthYear: (person) => person.birth_year,
-    // Can be null, so have to resolve manually
-    mass: (person) => (person.mass ? person.mass : 0),
+    mass: (person) => (isNaN(person) ? person.mass : person.mass.toString()),
     homeworld: (person, _, context) => context.loader.load(person.homeworld),
     films: (person, _, context) => context.loader.loadMany(person.films),
     species: (person, _, context) => context.loader.loadMany(person.species),

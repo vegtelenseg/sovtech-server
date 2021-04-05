@@ -8,7 +8,7 @@ export const People = gql`
     gender: String
     hairColor: String
     height: String
-    mass: Int
+    mass: String
     skinColor: String
     homeworld: Planet
     films: [Film]
